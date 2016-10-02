@@ -1,0 +1,7 @@
+package swing.xh.zzf.impl;
+
+public class RunTank extends TankFrame{
+	public static void main(String[] args) {
+		new TankFrame();
+	}
+}

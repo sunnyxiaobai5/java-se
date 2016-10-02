@@ -1,0 +1,45 @@
+package swing.xh.zzf.impl;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
+public class Welcome extends JLabel implements ActionListener{
+	private JButton btn_start, btn_help, btn_exit;
+	private TankFrame father;
+
+	public void init() {
+		btn_start = new JButton(ResUtil.btn_start);
+		btn_help = new JButton(ResUtil.btn_help);
+		btn_exit = new JButton(ResUtil.btn_exit);
+		btn_start.setBounds(100, 220, 205, 60);
+		btn_help.setBounds(100,320, 205, 60);
+		btn_exit.setBounds(100, 420, 205, 60);
+		this.add(btn_start);
+		this.add(btn_help);
+		this.add(btn_exit);
+		btn_start.addActionListener(this);
+		btn_help.addActionListener(this);
+		btn_exit.addActionListener(this);
+	}
+
+	public Welcome(TankFrame father) {
+		this.setIcon(ResUtil.bg_welcome);
+		this.father = father;
+		this.init();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(btn_start==e.getSource()){
+			father.showCard("game");
+		}
+		if(btn_help==e.getSource()){
+			father.showCard("help");
+		}
+		else if (btn_exit==e.getSource()){
+			System.exit(0);
+		}
+	}
+}

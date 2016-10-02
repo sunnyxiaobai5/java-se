@@ -1,0 +1,66 @@
+package com.sunny_xiaobai5.controller;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+
+import com.sunny_xiaobai5.entities.Game;
+import com.sunny_xiaobai5.entities.Tank;
+import com.sunny_xiaobai5.listener.TankListener;
+import com.sunny_xiaobai5.util.DirTankUtil;
+
+public class TankController extends KeyAdapter implements TankListener {
+	private Game game;
+	private List<Tank> tank;
+
+	public TankController(Game game, List<Tank> tank) {
+		super();
+		this.game = game;
+		this.tank = tank;
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		// 根据按键改变坦克的方向
+		for (Tank t : tank) {
+			if (t.good) {
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_UP:
+					t.y -= 5;
+					t.changeDirection(DirTankUtil.UP);
+					game.display();
+					break;
+				case KeyEvent.VK_DOWN:
+					t.y += 5;
+					t.changeDirection(DirTankUtil.DOWN);
+					game.display();
+					break;
+				case KeyEvent.VK_LEFT:
+					t.x -= 5;
+					t.changeDirection(DirTankUtil.LEFT);
+					game.display();
+					break;
+				case KeyEvent.VK_RIGHT:
+					t.x += 5;
+					t.changeDirection(DirTankUtil.RIGHT);
+					game.display();
+					break;
+				}
+			}
+		}
+	}
+
+
+	public void newGame() {
+		for (Tank t : tank)
+			if (t.good) {
+				t.start();
+			}
+	}
+
+	public void tankMoved() {
+		// TODO Auto-generated method stub
+		game.display()
+	}
+}

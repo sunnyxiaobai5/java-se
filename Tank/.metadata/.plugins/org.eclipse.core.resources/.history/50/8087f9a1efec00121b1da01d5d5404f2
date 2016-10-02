@@ -1,0 +1,61 @@
+package swing.xh.zzf.impl;
+
+import java.awt.Graphics;
+
+public class Tank {
+	private int x, y;
+	public DirUtil dir = DirUtil.Stop;
+	public boolean good;
+
+	public Tank(int x, int y, DirUtil dir, boolean good) {
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
+		this.good = good;
+	}
+
+	public void move() {
+		if (!good) {
+			switch (dir) {
+			case Up: 
+				y -= 2;
+				break;
+			case Down:
+				y += 2;
+				break;
+			case Left:
+				x -= 2;
+				break;
+			case Right:
+				x += 2;
+				break;
+			}
+		}
+	}
+
+	public void draw(Graphics g) {
+		int i = 4;
+		if (good) {
+			i = 0;
+		}
+		switch (dir) {
+		case Up:
+			g.drawImage(ResUtil.img_tank[i], x, y, null);
+			break;
+		case Down:
+			g.drawImage(ResUtil.img_tank[i + 1], x, y, null);
+			break;
+		case Left:
+			g.drawImage(ResUtil.img_tank[i + 2], x, y, null);
+			break;
+		case Right:
+			g.drawImage(ResUtil.img_tank[i + 3], x, y, null);
+			break;
+		case Stop:
+			g.drawImage(ResUtil.img_tank[i], x, y, null);
+			break;
+		}
+		this.move();
+
+	}
+}

@@ -1,0 +1,5 @@
+package swing.xh.zzf.impl;
+
+public enum DirUtil {
+	Up,Down,Left,Right,Stop;
+}

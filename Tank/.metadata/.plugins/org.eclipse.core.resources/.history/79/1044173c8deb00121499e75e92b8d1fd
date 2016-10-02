@@ -1,0 +1,7 @@
+package com.sunny_xiaobai5.game;
+
+public class Test {
+	public static void main(String[] args) {
+		new TankFrame();
+	}
+}

@@ -1,0 +1,44 @@
+package swing.xh.zzf.impl;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
+public class ResUtil {
+	public static Toolkit toolkit=Toolkit.getDefaultToolkit();//获得本地默认工具包
+	/*public static Image TankU=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankU.gif"));
+	public static Image TankD=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankD.gif"));
+	public static Image TankR=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankR.gif"));
+	public static Image TankL=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankL.gif"));
+	public static Image TankU01=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankU01.gif"));
+	public static Image TankD01=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankD01.gif"));
+	public static Image TankL01=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankL01.gif"));
+	public static Image TankR01=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/tankR01.gif"));*/
+	public static Image cc=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/cc.gif"));
+	public static Image gnimg=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/gnimg.jpg"));
+	public static Image lawn=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/lawn.gif"));
+	public static Image mbtn=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/mbtn.jpg"));
+	public static Image missileD=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/missileD.gif"));
+	public static Image missileL=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/missileL.gif"));
+	public static Image missileR=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/missileR.gif"));
+	public static Image missileU=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/missileU.gif"));
+	public static Image nl=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/nl.gif"));
+	public static Image shu=Toolkit.getDefaultToolkit().getImage(ResUtil.class.getResource("/images/shu.gif"));
+	public static Icon bg_welcome=new ImageIcon(ResUtil.class.getResource("/images/bg_welcome.jpg"));
+	public static Icon bg_help=new ImageIcon(ResUtil.class.getResource("/images/bg_help.jpg"));
+	public static Icon bg_game=new ImageIcon(ResUtil.class.getResource("/images/bg_game.jpg"));
+	public static Icon btn_start=new ImageIcon(ResUtil.class.getResource("/images/btn_start.jpg"));
+	public static Icon btn_help=new ImageIcon(ResUtil.class.getResource("/images/btn_help.jpg"));
+	public static Icon btn_exit=new ImageIcon(ResUtil.class.getResource("/images/btn_exit.jpg"));
+	public static Icon btn_return=new ImageIcon(ResUtil.class.getResource("/images/btn_return.jpg"));
+	public static Image[] img_tank=new Image[]{
+		toolkit.getImage(ResUtil.class.getResource("/images/tankU.gif")),
+		toolkit.getImage(ResUtil.class.getResource("/images/tankD.gif")),
+		toolkit.getImage(ResUtil.class.getResource("/images/tankL.gif")),
+		toolkit.getImage(ResUtil.class.getResource("/images/tankR.gif")),
+		toolkit.getImage(ResUtil.class.getResource("/images/tankU01.gif")),
+		toolkit.getImage(ResUtil.class.getResource("/images/tankD01.gif")),
+		toolkit.getImage(ResUtil.class.getResource("/images/tankL01.gif")),
+		toolkit.getImage(ResUtil.class.getResource("/images/tankR01.gif")),
+	};
+}

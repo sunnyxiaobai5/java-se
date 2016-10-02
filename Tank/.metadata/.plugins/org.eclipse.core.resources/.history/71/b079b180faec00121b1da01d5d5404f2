@@ -1,0 +1,34 @@
+package com.sunny_xiaobai5.game;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sunny_xiaobai5.controller.TankController;
+import com.sunny_xiaobai5.entities.Game;
+import com.sunny_xiaobai5.entities.Help;
+import com.sunny_xiaobai5.entities.Tank;
+import com.sunny_xiaobai5.entities.TankFrame;
+import com.sunny_xiaobai5.entities.Welcome;
+import com.sunny_xiaobai5.util.DirTankUtil;
+
+public class NewGame {
+	public static void main(String[] args) {
+		Tank tank = new Tank(400, 500, DirTankUtil.UP, true);
+		Tank tank1=new Tank(300,400,DirTankUtil.UP,false);
+	    List<Tank> tankC=new ArrayList<Tank>();
+	    tankC.add(tank);
+	    tankC.add(tank1);
+		TankFrame frame = new TankFrame();
+		Welcome welcome = new Welcome(frame);
+		Help help = new Help(frame);
+		Game game = new Game(frame, tankC);
+		frame.addCard(welcome, "welcome");
+		frame.addCard(game, "game");
+		frame.addCard(help, "help");
+		TankController tankController= new TankController(game, tankC);
+		frame.addKeyListener(tankController);
+		tank1.addTankListener(tankController);
+		tank.addTankListener(tankController)
+		tankController.newGame();
+	}
+}

@@ -1,0 +1,13 @@
+package com.sunny_xiaobai5.game;
+
+import com.sunny_xiaobai5.entities.Game;
+import com.sunny_xiaobai5.entities.Help;
+import com.sunny_xiaobai5.entities.TankFrame;
+import com.sunny_xiaobai5.entities.Welcome;
+
+public class Test {
+	public static void main(String[] args) {
+		TankFrame frame=new TankFrame();
+		new TankFrame(new Welcome(),new Game(),new Help());
+	}
+}

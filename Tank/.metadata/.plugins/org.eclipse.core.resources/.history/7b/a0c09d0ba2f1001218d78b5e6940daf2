@@ -1,0 +1,194 @@
+package Tank_info;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.util.List;
+import java.util.Random;
+
+public class Tank {
+	private int x, y;
+	public DirUtil dir = DirUtil.Stop;
+	public boolean _good;
+	public game game;
+	public Tank tank;
+	public int life;
+
+	public Rectangle getRectangle() {
+		return new Rectangle(x, y, 50, 50);
+	}
+
+	public boolean hitRoadBlock(RoadBlock roadBlock) {
+		return roadBlock.getRectangle().intersects(this.getRectangle());
+	}
+
+	public boolean hitRoadBlocks(List<RoadBlock> list) {
+		for (RoadBlock temp : list) {
+			if (hitRoadBlock(temp)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean hitTank(Tank tank) {
+		if (tank == null)
+			return false;
+		boolean flag = tank.getRectangle().intersects(this.getRectangle());
+		if (tank == this) {
+			flag = false;
+		}
+		if (flag) {
+		}
+		return flag;
+	}
+
+	public boolean hitTanks(List<Tank> list) {
+		for (Tank temp : list) {
+			if (hitTank(temp)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// 构造方法
+	public Tank(int x, int y, DirUtil dir, boolean _good, game game) {
+		this.x = x;
+		this.y = y;
+		this.dir = dir;
+		this._good = _good;
+		this.game = game;
+		// this.tank = tank;,Tank tank
+		this.life = 100;
+	}
+
+	private int step = 3;
+
+	// 敌方坦克群改变方向
+	public void randmove() {
+		Random random = new Random();
+		int n = random.nextInt(5);
+		if (step == 0) {
+			switch (n) {
+			case 0:
+				this.dir = DirUtil.Up;
+				y -= 20;
+				break;
+			case 1:
+				this.dir = DirUtil.Down;
+				y += 20;
+				break;
+			case 2:
+				this.dir = DirUtil.Left;
+				x -= 20;
+				break;
+			case 3:
+				this.dir = DirUtil.Right;
+				x += 20;
+				break;
+			default:
+				break;
+			}
+			step = random.nextInt(7) + 1;
+		}
+		step--;
+		if (random.nextInt(30) > 10) {
+			fire();
+		}
+	}
+
+	// 我方坦克移动距离及边界
+	public void move() {
+		int oldX = x;
+		int oldY = y;
+		switch (dir) {
+		case Up:
+			y -= 8;
+			break;
+		case Down:
+			y += 8;
+			break;
+		case Left:
+			x -= 8;
+			break;
+		case Right:
+			x += 8;
+			break;
+		}
+		if (x < 0
+				|| y < 0
+				|| x > (Toolkit.getDefaultToolkit().getScreenSize().width - 50)
+				|| y > (Toolkit.getDefaultToolkit().getScreenSize().height - 50)
+				|| hitRoadBlocks(game.roadBlocks) || hitTanks(game.tanks)) {
+			x = oldX;
+			y = oldY;
+		}
+	}
+
+	private int stopIndex = -1;
+
+	// 坦克方向
+	public void draw(Graphics g) {
+		int i = 0;
+		if (!_good) {
+			i = 4;
+			randmove();
+		}
+		if (stopIndex == -1) {
+			stopIndex = i;
+		}
+		switch (dir) {
+		case Up:
+			g.drawImage(ResUtil.Imag_tank[i], x, y, null);
+			stopIndex = i;
+			break;
+		case Down:
+			g.drawImage(ResUtil.Imag_tank[i + 1], x, y, null);
+			stopIndex = i + 1;
+			break;
+		case Left:
+			g.drawImage(ResUtil.Imag_tank[i + 2], x, y, null);
+			stopIndex = i + 2;
+			break;
+		case Right:
+			g.drawImage(ResUtil.Imag_tank[i + 3], x, y, null);
+			stopIndex = i + 3;
+			break;
+		default:
+			g.drawImage(ResUtil.Imag_tank[stopIndex], x, y, null);
+			break;
+		}
+		move();
+		g.setColor(Color.RED);
+		g.drawRect(x, y, 50, 5);
+		g.fillRect(x, y, (50 * life) / 100, 5);
+	}
+
+	DirUtil tempdir = DirUtil.Stop;
+
+	public void fire() {
+		if (dir == DirUtil.Stop) {
+			switch (stopIndex) {
+			case 0:
+				this.dir = DirUtil.Up;
+				break;
+			case 1:
+				this.dir = DirUtil.Down;
+				break;
+			case 2:
+				this.dir = DirUtil.Left;
+				break;
+			case 3:
+				this.dir = DirUtil.Right;
+				break;
+			}
+		} else {
+			tempdir = dir;
+		}
+		Missile mis = new Missile(x + 18, y + 14, tempdir, _good, 12, 12, game,
+				this);
+		game.missile.add(mis);
+	}
+}

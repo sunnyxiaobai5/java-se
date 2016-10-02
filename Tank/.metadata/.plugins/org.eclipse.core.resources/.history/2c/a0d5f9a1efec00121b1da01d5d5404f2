@@ -1,0 +1,43 @@
+package swing.xh.zzf.impl;
+
+import java.awt.CardLayout;
+
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+
+import swing.xh.zzf.impl.ResUtil;
+public class TankFrame extends JFrame {
+	int ScreenHeight=Toolkit.getDefaultToolkit().getScreenSize().height;
+	int ScreenWidth=Toolkit.getDefaultToolkit().getScreenSize().width;
+	private Welcome welcome;
+	private CardLayout card;
+	private Game game;
+	private Help help;
+	public void init(){
+		card=new CardLayout();
+		this.setLayout(card);
+		welcome=new Welcome(this);
+		this.add("welcome",welcome);
+		game=new Game(this);
+		this.add("game",game);
+		help=new Help(this);
+		this.add("help",help);
+	}
+	public void setCenter(){
+		this.setLocation((ScreenWidth-this.getWidth())/2, (ScreenHeight-this.getHeight())/2);
+	}
+	public void showCard(String name){
+		card.show(this.getContentPane(), name);
+	}
+	public TankFrame() {
+		this.setSize(1008, 718);
+		this.setResizable(false);
+		this.setTitle("Ì¹¿Ë´óÕ½");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setCenter();
+		this.init();
+		this.setVisible(true);
+		}
+	
+}
